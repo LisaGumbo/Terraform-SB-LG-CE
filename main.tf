@@ -103,6 +103,27 @@ resource "aws_security_group" "SCL-ssh-allowed-frontend" {
 }
 
 
+resource "aws_instance" "SCL-EC2-web" {
+    ami = "ami-0ed9277fb7eb570c9"
+    instance_type = "t2.micro"
+    # VPC
+    subnet_id = aws_subnet.SCL-public-subnet.id
+    # Security Group
+    vpc_security_group_ids = [aws_security_group.SCL-ssh-allowed-frontend.id]
+    # the Public SSH key
+    key_name = "lisagumbo-ec2-keypair"
+
+    tags = {
+        Name = "SCL-EC2-web"
+    }
+    user_data = "${file("frontend.sh")}"
+}
+
+output "SCL-subnet_id" {
+  value = aws_subnet.SCL-public-subnet.id
+}
+
+
 
 
 
