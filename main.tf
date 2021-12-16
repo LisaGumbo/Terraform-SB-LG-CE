@@ -111,8 +111,8 @@ resource "aws_instance" "SCL-EC2-web" {
     # Security Group
     vpc_security_group_ids = [aws_security_group.SCL-ssh-allowed-frontend.id]
     # the Public SSH key
-    key_name = "lisagumbo-ec2-keypair"
-
+    # key_name = "lisagumbo-ec2-keypair"
+    key_name = "christianKeyPair12-9-1"
     tags = {
         Name = "SCL-EC2-web"
     }
